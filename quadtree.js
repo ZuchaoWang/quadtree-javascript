@@ -1,6 +1,8 @@
 /*
  * QuadTree Implementation in JavaScript
  * @author: silflow <https://github.com/silflow>
+ * 
+ * Modified by ZuchaoWang, by adding an id attribute and a getItems method for each node
  *
  * Usage:
  * To create a new empty Quadtree, do this:
@@ -38,7 +40,9 @@ QUAD.init = function (args) {
     var BOTTOM_LEFT  = 2;
     var BOTTOM_RIGHT = 3;
     var PARENT       = 4;
-
+    
+    var next_id = 0;
+    
     // assign default values
     args.maxChildren = args.maxChildren || 2;
     args.maxDepth = args.maxDepth || 4;
@@ -50,7 +54,10 @@ QUAD.init = function (args) {
     node = function (x, y, w, h, depth, maxChildren, maxDepth) {
 
         var items = [], // holds all items
-            nodes = []; // holds all child nodes
+            nodes = [], // holds all child nodes
+            id = next_id; // current id
+        
+        next_id++;
 
         // returns a fresh node object
         return {
@@ -60,6 +67,7 @@ QUAD.init = function (args) {
             w : w, // width
             h : h, // height
             depth : depth, // depth level of the node
+            id: id, // id of the node
 
             /**
              * iterates all items that match the selector and invokes the supplied callback on them.
@@ -212,7 +220,11 @@ QUAD.init = function (args) {
              * on a canvas for debugging etc...
              */
             getNodes : function () {
-                return nodes.length ? nodes : false;
+                return nodes.length ? nodes : null;
+            },
+            
+            getItems: function () {
+                return items.length ? items : null;
             }
         };
     };
@@ -244,6 +256,7 @@ QUAD.init = function (args) {
 
         clear : function () {
             this.root.clear();
+            next_id = 1; // because the id of root is 0 
         }
     };
 };

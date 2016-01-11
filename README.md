@@ -1,9 +1,20 @@
-﻿QuadTree Implementation in JavaScript
+QuadTree Implementation in JavaScript
 ========
 
-**Author:** 
+**Original Author:** 
 
  * silflow
+
+### Modifications ###
+
+**Author:**
+
+ * ZuchaoWang
+ 
+**Contents modified:** 
+
+ - Automatically assign an id for each node
+ - Add getItems method for each node
 
 ### Usage ###
 To create a new empty Quadtree, do this:
